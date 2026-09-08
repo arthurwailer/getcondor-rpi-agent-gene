@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package drone.telemetry;
+option go_package = "github.com/tu-usuario/drone-platform/proto/telemetry";
+
+// Mensaje principal que un drone envía periódicamente
+message TelemetryMessage {
+  string drone_id       = 1;  // ID único del drone
+  string mission_id     = 2;  // misión activa (puede estar vacío)
+  int64  timestamp      = 3;  // unix timestamp en milisegundos
+
+  GpsPosition  position = 4;
+  FlightStatus status   = 5;
+  BatteryInfo  battery  = 6;
+}
+
+// Posición GPS
+message GpsPosition {
+  double latitude   = 1;
+  double longitude  = 2;
+  double altitude   = 3;  // metros sobre el nivel del mar
+  float  speed      = 4;  // m/s
+  float  heading    = 5;  // grados 0-360
+  float  accuracy   = 6;  // precisión GPS en metros
+}
+
+// Estado general del vuelo
+message FlightStatus {
+  DroneState state        = 1;
+  float      pitch        = 2;  // grados
+  float      roll         = 3;  // grados
+  float      yaw          = 4;  // grados
+  float      wind_speed   = 5;  // m/s
+  string     error_code   = 6;  // vacío si no hay error
+}
+
+// Batería
+message BatteryInfo {
+  float percentage    = 1;  // 0.0 - 100.0
+  float voltage       = 2;  // voltios
+  float temperature   = 3;  // celsius
+  int32 time_remaining = 4; // segundos estimados
+}
+
+// Estados posibles del drone
+enum DroneState {
+  UNKNOWN   = 0;
+  IDLE      = 1;
+  TAKING_OFF = 2;
+  FLYING    = 3;
+  HOVERING  = 4;
+  LANDING   = 5;
+  RETURNING = 6;
+  ERROR     = 7;
+}
