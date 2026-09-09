@@ -7,11 +7,31 @@ Sends real-time telemetry via MQTT (Protobuf) and uploads geotagged photos via H
 
 - Python 3.8+
 - Internet connection (Wi-Fi, 4G, or Starlink)
+- Your GetCondor Drone ID and MQTT Token (provided by your GetCondor admin)
+
+## Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/arthurwailer/getcondor-rpi-agent-gene.git
+cd getcondor-rpi-agent-gene
+```
+
+2. (Optional but recommended) Create a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Install the dependencies:
+```bash
+pip install -r requirements.txt
+```
 
 ## Quick Start
 
+Run the agent:
 ```bash
-pip install -r requirements.txt
 python3 agent.py
 ```
 
@@ -94,4 +114,4 @@ cam.capture_file('/tmp/photo.jpg')
 
 ## Support
 
-Contact: info@getcondor.win
+Contact: contacto@getcondor.win
